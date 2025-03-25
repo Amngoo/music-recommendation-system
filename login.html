@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #000000);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #282828;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px;
+            fill: #1DB954;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: #aaa;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 1px solid #404040;
+            background-color: #3E3E3E;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1DB954;
+        }
+
+        .error {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1DB954;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1ed760;
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .switch-form a {
+            color: #1DB954;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+
+        #signup-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,3C7.03,3 3,7.03 3,12C3,16.97 7.03,21 12,21C16.97,21 21,16.97 21,12C21,7.03 16.97,3 12,3M15.5,12C15.5,13.93 13.93,15.5 12,15.5C10.07,15.5 8.5,13.93 8.5,12C8.5,10.07 10.07,8.5 12,8.5C13.93,8.5 15.5,10.07 15.5,12M12,11A1,1 0 0,0 11,12A1,1 0 0,0 12,13A1,1 0 0,0 13,12A1,1 0 0,0 12,11Z"/>
+            </svg>
+        </div>
+
+        <form id="login-form">
+            <h1>Login to Your Account</h1>
+            <div class="form-group">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                </svg>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <div class="error">Please enter a valid email</div>
+            </div>
+            <div class="form-group">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
+                </svg>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <div class="error">Password must be at least 6 characters</div>
+            </div>
+            <button type="submit">Log In</button>
+            <div class="switch-form">
+                Don't have an account? <a onclick="toggleForm()">Sign Up</a>
+            </div>
+        </form>
+
+        <form id="signup-form">
+            <h1>Create Account</h1>
+            <div class="form-group">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
+                </svg>
+                <input type="text" id="signup-username" placeholder="Username" required>
+                <div class="error">Username is required</div>
+            </div>
+            <div class="form-group">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                </svg>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <div class="error">Please enter a valid email</div>
+            </div>
+            <div class="form-group">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
+                </svg>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <div class="error">Password must be at least 6 characters</div>
+            </div>
+            <button type="submit">Sign Up</button>
+            <div class="switch-form">
+                Already have an account? <a onclick="toggleForm()">Log In</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleForm() {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+            }
+        }
+
+        // Login form validation
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email');
+            const password = document.getElementById('login-password');
+            let isValid = true;
+
+            // Email validation
+            if (!email.value.includes('@')) {
+                email.nextElementSibling.style.display = 'block';
+                isValid = false;
+            } else {
+                email.nextElementSibling.style.display = 'none';
+            }
+
+            // Password validation
+            if (password.value.length < 6) {
+                password.nextElementSibling.style.display = 'block';
+                isValid = false;
+            } else {
+                password.nextElementSibling.style.display = 'none';
+            }
+
+            if (isValid) {
+                console.log('Login successful!');
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Signup form validation
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('signup-username');
+            const email = document.getElementById('signup-email');
+            const password = document.getElementById('signup-password');
+            let isValid = true;
+
+            // Username validation
+            if (!username.value.trim()) {
+                username.nextElementSibling.style.display = 'block';
+                isValid = false;
+            } else {
+                username.nextElementSibling.style.display = 'none';
+            }
+
+            // Email validation
+            if (!email.value.includes('@')) {
+                email.nextElementSibling.style.display = 'block';
+                isValid = false;
+            } else {
+                email.nextElementSibling.style.display = 'none';
+            }
+
+            // Password validation
+            if (password.value.length < 6) {
+                password.nextElementSibling.style.display = 'block';
+                isValid = false;
+            } else {
+                password.nextElementSibling.style.display = 'none';
+            }
+
+            if (isValid) {
+                console.log('Signup successful!');
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
